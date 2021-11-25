@@ -5,10 +5,15 @@
 </template>
 
 <script>
+import {useStore} from "vuex";
+
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  mounted: () => {
+    console.log(store.state.count)
   }
 }
 </script>
