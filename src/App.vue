@@ -1,9 +1,9 @@
 <template>
-  <QuoteList />
+  <QuoteList msg="test" />
 </template>
 
 <script>
-import QuoteList from './components/QuoteList.vue'
+import QuoteList from '@/components/QuoteList.vue'
 
 export default {
   name: 'App',
