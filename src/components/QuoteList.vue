@@ -1,19 +1,22 @@
 <template>
   <div class="hello">
-    <h1>Quotes</h1>
+    <h3>Quotes</h3>
+    <div v-for="(quote, index) in quotes" :key="index">
+      {{ quote.text }}
+    </div>
   </div>
 </template>
 
 <script>
-import {useStore} from "vuex";
-
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
   },
-  mounted: () => {
-    console.log(store.state.count)
+  computed: {
+    quotes () {
+      return this.$store.state.quotes
+    }
   }
 }
 </script>

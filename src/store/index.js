@@ -1,20 +1,23 @@
 import { createStore } from "vuex";
 
-export default createStore({
-  state: {
-    quotes: [
-      {
-        text: 'Truthfullness is the foundation of all human virtues'
-      }
-    ],
-    count: 0,
+const store = createStore({
+  state () {
+    return {
+      count: 0,
+      quotes: [
+        {
+          text: 'Truthfulness is the foundation of all human virtues...',
+          author: `Bahá'í`
+        }
+      ]
+    }
   },
   mutations: {
     increment (state) {
       state.count++
     }
-  },
-  increment (context) {
-    context.commit('increment')
   }
 })
+
+
+export default store
