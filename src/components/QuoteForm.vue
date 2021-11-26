@@ -31,16 +31,16 @@
       }
     },
     methods: {
+      random (length = 8) {
+        return Math.random().toString(16).substr(2, length);
+      },
       async onFormSubmit ()  {
-        await setDoc(doc(db, 'quotes', 'is_there_any_remover'), {
+        await setDoc(doc(db, 'quotes', this.random), {
           text: this.quote.text,
           author: this.quote.author,
           topic: this.quote.topic
         })
       }
-    },
-    mounted() {
-      this.$store.dispatch('fetchQuotes')
     }
   }
 </script>

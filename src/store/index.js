@@ -27,23 +27,31 @@ const store = createStore({
   mutations: {
     setQuote (state, quote) {
       state.quotes = [quote]
+    },
+    addQuote (state, quote) {
+      state.quotes.push(quote)
+    },
+    addQuotes (state, quote) {
+      state.quotes.push(quote)
     }
   },
   actions: {
     async fetchQuotes() {
       let quote = blankQuote
+      let quotes = []
 
       const querySnapshot = await getDocs(q);
+
       querySnapshot.forEach((doc) => {
+        quote = blankQuote
         quote.id = doc.id
         quote.text = doc.data().text
         quote.author = doc.data().author
-        this.commit('setQuote', quote)
+        quotes.push(quote)
       });      
+      this.commit('addQuotes', quotes)
     }
   }
-
 })
-
 
 export default store

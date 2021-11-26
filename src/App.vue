@@ -1,15 +1,14 @@
 <template>
-  <QuoteList msg="test" />
+  <div id="nav">
+      <router-link to="/">Quotes</router-link> |
+      <router-link to="/new">New</router-link>
+  </div>
+  <router-view />
 </template>
 
 <script>
-import QuoteList from '@/components/QuoteList.vue'
-
 export default {
-  name: 'App',
-  components: {
-    QuoteList
-  }
+  name: 'App'
 }
 </script>
 
