@@ -1,10 +1,16 @@
 <template>
   <form @submit.prevent="onFormSubmit">
     <div>
-      <input type="text" v-model="quote.text" placeholder="text">
+      <textarea type="text" v-model="quote.text" placeholder="text">
+      </textarea>
     </div>
     <div>
-      <input type="text" v-model="quote.author" placeholder="author">
+      <textarea type="text" v-model="quote.author" placeholder="author">
+      </textarea>
+    </div>
+    <div>
+      <textarea type="text" v-model="quote.topic" placeholder="topic">
+      </textarea>
     </div>
     <div>
       <button type="submit">Save</button>
@@ -14,35 +20,23 @@
 
 <script>
   import { firebaseApp } from '../database/index.js';
-  import { getFirestore, collection, query, getDocs } from "firebase/firestore";
+  import { getFirestore, doc, setDoc } from "firebase/firestore";
 
   const db = getFirestore(firebaseApp);
-
-  const q = query(collection(db, "quotes"));
-
-  getDocs(q).then(querySnapshot => {
-    querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data().text);
-    });
-  });
 
   export default {
     data() {
       return {
-        quote: {
-        }
+        quote: { }
       }
     },
     methods: {
-      onFormSubmit(event) {
-        event.preventDefault()
-        db.collection('quotes').add(this.quote).then(() => {
-          alert("Quote successfully created!");
-          this.quote.text = ''
-          this.quote.author = ''
-        }).catch((error) => {
-          console.log(error);
-        });
+      async onFormSubmit ()  {
+        await setDoc(doc(db, 'quotes', 'is_there_any_remover'), {
+          text: this.quote.text,
+          author: this.quote.author,
+          topic: this.quote.topic
+        })
       }
     },
     mounted() {
