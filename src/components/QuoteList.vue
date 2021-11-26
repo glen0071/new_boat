@@ -2,14 +2,19 @@
   <div class="hello">
     <h3>Quotes</h3>
     <div v-for="(quote, index) in quotes" :key="index">
-      {{ quote.text }}
+      <QuoteItem :quote="quote" />
     </div>
   </div>
 </template>
 
 <script>
+import QuoteItem from './QuoteItem.vue'
+
 export default {
-  name: 'HelloWorld',
+  name: 'QuoteList',
+  components: {
+    QuoteItem
+  },
   props: {
     msg: String
   },
