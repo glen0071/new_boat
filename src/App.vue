@@ -1,14 +1,23 @@
 <template>
   <div id="nav">
       <router-link to="/">Quotes</router-link> |
-      <router-link to="/new">New</router-link>
+      <a href="" @click.prevent="newQuote">New</a>
   </div>
   <router-view />
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  mounted() {
+    this.$store.dispatch('fetchQuotes')
+  },
+  methods: {
+    newQuote() {
+      this.$store.commit('clearQuote')
+      this.$router.push({ path: 'new' })
+    }
+  }
 }
 </script>
 

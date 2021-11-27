@@ -1,56 +1,71 @@
 import { createStore } from "vuex";
 import { firebaseApp } from '../database/index.js';
-import { getFirestore, collection, query, getDocs } from "firebase/firestore";
+import { getFirestore, collection, query, getDocs, getDoc, doc } from "firebase/firestore";
 
 const db = getFirestore(firebaseApp);
 const q = query(collection(db, "quotes"));
 const blankQuote = {
-  id: '',
+  id: '001',
   text: '',
-  author: ''
+  author: '',
+  topics: ''
 }
 
 const store = createStore({
   state () {
     return {
       count: 0,
-      quotes: [
-        {
-          id: '001',
-          text: 'Truthfulness is the foundation of all human virtues...',
-          author: `Bahá'í`
-        }
-      ],
-      blankQuote: blankQuote
+      quotes: [ blankQuote ],
+      blankQuote: blankQuote,
+      currentQuote: blankQuote
     }
   },
   mutations: {
     setQuote (state, quote) {
-      state.quotes = [quote]
+      state.currentQuote = quote
+    },
+    setQuotes (state, quotes) {
+      state.quotes = quotes
     },
     addQuote (state, quote) {
       state.quotes.push(quote)
     },
-    addQuotes (state, quote) {
-      state.quotes.push(quote)
+    addQuotes (state, quotes) {
+      state.quotes.push(quotes)
+    },
+    clearQuote (state) {
+      state.currentQuote = blankQuote
     }
   },
   actions: {
     async fetchQuotes() {
-      let quote = blankQuote
       let quotes = []
-
       const querySnapshot = await getDocs(q);
-
       querySnapshot.forEach((doc) => {
-        quote = blankQuote
-        quote.id = doc.id
-        quote.text = doc.data().text
-        quote.author = doc.data().author
-        quotes.push(quote)
-      });      
-      this.commit('addQuotes', quotes)
+        quotes.push(
+          {
+            id: doc.id,
+            text: doc.data().text,
+            author: doc.data().author
+          }
+        )
+      }); 
+      this.commit('setQuotes', quotes)
+    },
+    async fetchQuote(_state, quoteId) {
+      const docRef = doc(db, "quotes", quoteId);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        this.commit('setQuote', docSnap.data())
+      } else {
+        // doc.data() will be undefined in this case
+        // error handling when doc is not found
+      }
     }
+  },
+  getters: {
+    currentQuote: state => state.currentQuote
   }
 })
 

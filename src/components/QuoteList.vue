@@ -1,7 +1,7 @@
 <template>
-  <div class="hello">
+  <div class="">
     <h3>Quotes</h3>
-    <div v-for="(quote, index) in quotes" :key="index">
+    <div v-for="(quote, index) in allQuotes" :key="index">
       <QuoteItem :quote="quote" />
     </div>
   </div>
@@ -12,20 +12,16 @@ import QuoteItem from './QuoteItem.vue'
 
 export default {
   name: 'QuoteList',
+  data() {
+    return { quotes: this.$store.state.quotes }
+  },
   components: {
     QuoteItem
   },
-  props: {
-    msg: String
-  },
   computed: {
-    quotes () {
+    allQuotes() {
       return this.$store.state.quotes
     }
-  },
-  mounted() {
-    console.log(this.$store.state.quotes)
-    this.$store.dispatch('fetchQuotes')
   }
 }
 </script>

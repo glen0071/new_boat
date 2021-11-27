@@ -5,12 +5,17 @@ import QuoteForm from '@/components/QuoteForm.vue'
 const routes = [
   {
     path: '/',
-    name: 'QuoteList',
+    name: 'list',
     component: QuoteList
   },
   {
     path: '/new',
-    name: 'QuoteForm',
+    name: 'new',
+    component: QuoteForm
+  },
+  {
+    path: '/edit/:id',
+    name: 'edit',
     component: QuoteForm
   },
 ]
