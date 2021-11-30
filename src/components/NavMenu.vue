@@ -23,6 +23,14 @@
 			<div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 bg-gray-100 md:bg-transparent z-20" id="nav-content">
 				<ul class="list-reset lg:flex justify-end flex-1 items-center">
 					<li class="mr-3">
+						<form action="" >
+              <input type="text" placeholder="find">
+              <button>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 2c4.968 0 9 4.032 9 9s-4.032 9-9 9-9-4.032-9-9 4.032-9 9-9zm0 16c3.867 0 7-3.133 7-7 0-3.868-3.133-7-7-7-3.868 0-7 3.132-7 7 0 3.867 3.132 7 7 7zm8.485.071l2.829 2.828-1.415 1.415-2.828-2.829 1.414-1.414z"/></svg>
+              </button>
+            </form>
+					</li>
+					<li class="mr-3">
 						<router-link to="/" class="inline-block py-2 px-4 text-gray-900 font-bold no-underline" href="#">Be Inspired</router-link>
 					</li>
 					<li class="mr-3">
@@ -35,6 +43,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'NavMenu',
   methods: {
