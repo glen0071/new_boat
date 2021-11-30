@@ -1,6 +1,5 @@
 <template>
   <div class="">
-    <h3>Quotes</h3>
     <div v-for="(quote, index) in allQuotes" :key="index">
       <QuoteItem :quote="quote" />
     </div>

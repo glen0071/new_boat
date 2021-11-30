@@ -1,10 +1,11 @@
 <template>
-  <div>
-    <div> {{ quote.text }} </div>
-    <div> {{ quote.author }} 
-      <router-link 
-      :to="{ name: 'edit', params: { id: quote.id } }"
-      >Edit</router-link> 
+  <div class="py-6">
+    <router-link 
+    :to="{ name: 'edit', params: { id: quote.id } }"
+    >{{ quote.text }}
+    </router-link> 
+    <div class="text-sm md:text-base font-normal text-gray-600 float-right"> 
+      ({{ quote.author }})
     </div>
     
   </div>

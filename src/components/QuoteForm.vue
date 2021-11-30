@@ -1,19 +1,24 @@
 <template>
   <form @submit.prevent="onFormSubmit">
     <div>
-      <textarea type="text" v-model="quote.text" placeholder="text">
+      <textarea type="text" v-model="quote.text" placeholder="text" class="w-full p-2 text-center content-center italic rounded mb-5">
       </textarea>
     </div>
     <div>
-      <textarea type="text" v-model="quote.author" placeholder="author">
+      <input type="text" v-model="quote.author" placeholder="author" class="w-full p-2 text-center content-center italic rounded mb-8" />
+    </div>
+    <div>
+      <textarea type="text" v-model="quote.topic" placeholder="topic" class="w-full p-2 text-center content-center italic rounded">
       </textarea>
     </div>
     <div>
-      <textarea type="text" v-model="quote.topic" placeholder="topic">
-      </textarea>
-    </div>
-    <div>
-      <button type="submit">Save</button>
+      <div class='actions width-full flex justify-end'>
+        <button 
+          class="bg-blue-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full m-5"
+          type="submit">
+          Save
+        </button>
+      </div>
     </div>
   </form>
 </template>
@@ -41,11 +46,19 @@
       random (length = 8) {
         return Math.random().toString(16).substr(2, length);
       },
+      created () {
+        if (this.quote.createdAt) {
+          return this.quote.createdAt
+        } else {
+          return Date.now()
+        }
+      },
       async onFormSubmit ()  {
         await setDoc(doc(db, 'quotes', this.getId()), {
           text: this.quote.text,
           author: this.quote.author,
-          topic: this.quote.topic
+          createdAt: Date.now(),
+          topic: 'workin'
         })
       }
       // when succeeds, needs to update store.

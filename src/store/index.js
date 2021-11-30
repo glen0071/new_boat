@@ -1,9 +1,9 @@
 import { createStore } from "vuex";
 import { firebaseApp } from '../database/index.js';
-import { getFirestore, collection, query, getDocs, getDoc, doc } from "firebase/firestore";
+import { getFirestore, collection, query, getDocs, getDoc, orderBy, doc } from "firebase/firestore";
 
 const db = getFirestore(firebaseApp);
-const q = query(collection(db, "quotes"));
+const queryLatest = query(collection(db, "quotes"), orderBy('createdAt'));
 const blankQuote = {
   id: '001',
   text: '',
@@ -38,9 +38,9 @@ const store = createStore({
     }
   },
   actions: {
-    async fetchQuotes() {
+    async fetchLatestQuotes() {
       let quotes = []
-      const querySnapshot = await getDocs(q);
+      const querySnapshot = await getDocs(queryLatest);
       querySnapshot.forEach((doc) => {
         quotes.push(
           {
