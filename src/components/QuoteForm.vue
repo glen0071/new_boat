@@ -8,7 +8,7 @@
       <input type="text" v-model="quote.author" placeholder="author" class="w-full p-2 text-center content-center italic rounded mb-8" />
     </div>
     <div>
-      <textarea type="text" v-model="quote.topic" placeholder="topic" class="w-full p-2 text-center content-center italic rounded">
+      <textarea type="text" v-model="quote.topics" placeholder="topics" class="w-full p-2 text-center content-center italic rounded">
       </textarea>
     </div>
     <div>
@@ -24,11 +24,6 @@
 </template>
 
 <script>
-  import { firebaseApp } from '../database/index.js';
-  import { getFirestore, doc, setDoc } from "firebase/firestore";
-
-  const db = getFirestore(firebaseApp);
-
   export default {
     computed: {
       quote() {
@@ -54,14 +49,14 @@
         }
       },
       async onFormSubmit ()  {
-        await setDoc(doc(db, 'quotes', this.getId()), {
-          text: this.quote.text,
-          author: this.quote.author,
+        const newQuote = {
+          ...this.quote,
+          id: this.getId(),
           createdAt: Date.now(),
-          topic: this.quote.topic
-        })
-      }
-      // when succeeds, needs to update store.
+        }
+        newQuote
+        this.$store.dispatch('saveNewQuote', newQuote)
+      },
     },
     mounted() {
       if (this.$route.params.id) {

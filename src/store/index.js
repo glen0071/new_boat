@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 import { firebaseApp } from '../database/index.js';
-import { getFirestore, collection, query, getDocs, getDoc, orderBy, doc } from "firebase/firestore";
+import { setDoc, getFirestore, collection, query, getDocs, getDoc, orderBy, doc } from "firebase/firestore";
 
 const db = getFirestore(firebaseApp);
 const queryLatest = query(collection(db, "quotes"), orderBy('createdAt'));
@@ -62,6 +62,9 @@ const store = createStore({
         // doc.data() will be undefined in this case
         // error handling when doc is not found
       }
+    },
+    async saveNewQuote(_state, quoteData) {
+      await setDoc(doc(db, 'quotes', quoteData.id), quoteData)
     }
   },
   getters: {

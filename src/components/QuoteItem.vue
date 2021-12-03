@@ -1,7 +1,7 @@
 <template>
   <div class="py-6">
     <router-link 
-    :to="{ name: 'edit', params: { id: quote.id } }"
+    :to="{ name: 'edit', params: { id: findId } }"
     >{{ quote.text }}
     </router-link> 
     <div class="text-sm md:text-base font-normal text-gray-600 float-right"> 
@@ -20,5 +20,14 @@ export default {
       required: true
     }
   },
+  computed: {
+    findId: function () {
+      if (this.quote.id) {
+        return this.quote.id
+      } else {
+        return this.quote.objectID
+      }
+    }
+  }
 }
 </script>
