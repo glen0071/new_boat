@@ -58,7 +58,7 @@
           text: this.quote.text,
           author: this.quote.author,
           createdAt: Date.now(),
-          topic: 'workin'
+          topic: this.quote.topic
         })
       }
       // when succeeds, needs to update store.
