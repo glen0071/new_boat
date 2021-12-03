@@ -48,13 +48,12 @@
           return Date.now()
         }
       },
-      async onFormSubmit ()  {
+      onFormSubmit ()  {
         const newQuote = {
           ...this.quote,
           id: this.getId(),
           createdAt: Date.now(),
         }
-        newQuote
         this.$store.dispatch('saveNewQuote', newQuote)
       },
     },
@@ -62,6 +61,8 @@
       if (this.$route.params.id) {
         const quoteId = this.$route.params.id
         this.$store.dispatch('fetchQuote', quoteId)
+      } else {
+        this.$store.commit('clearQuote')
       }
     }
   }

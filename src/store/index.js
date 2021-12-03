@@ -16,7 +16,6 @@ const store = createStore({
     return {
       count: 0,
       quotes: [ blankQuote ],
-      blankQuote: blankQuote,
       currentQuote: blankQuote
     }
   },
@@ -34,7 +33,12 @@ const store = createStore({
       state.quotes.push(quotes)
     },
     clearQuote (state) {
-      state.currentQuote = blankQuote
+      state.currentQuote = {
+        id: '001',
+        text: '',
+        author: '',
+        topics: ''
+      }
     }
   },
   actions: {
@@ -65,6 +69,7 @@ const store = createStore({
     },
     async saveNewQuote(_state, quoteData) {
       await setDoc(doc(db, 'quotes', quoteData.id), quoteData)
+      this.commit('clearQuote')
     }
   },
   getters: {
