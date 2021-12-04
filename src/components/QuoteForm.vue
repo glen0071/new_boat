@@ -8,6 +8,9 @@
       <input type="text" v-model="quote.author" placeholder="author" class="w-full p-2 text-center content-center italic rounded mb-8" />
     </div>
     <div>
+      <input type="text" v-model="quote.source" placeholder="source" class="w-full p-2 text-center content-center italic rounded mb-8" />
+    </div>
+    <div>
       <textarea type="text" v-model="quote.topics" placeholder="topics" class="w-full p-2 text-center content-center italic rounded">
       </textarea>
     </div>

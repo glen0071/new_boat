@@ -1,9 +1,11 @@
 <template>
-  <div class="py-6">
-    <router-link 
-    :to="{ name: 'edit', params: { id: findId } }"
-    >{{ quote.text }}
-    </router-link> 
+  <div class="w-full py-6">
+    <div>
+      <router-link 
+      :to="{ name: 'edit', params: { id: findId } }"
+      >{{ quote.text }}
+      </router-link> 
+    </div>
     <div class="text-sm md:text-base font-normal text-gray-600 float-right"> 
       ({{ quote.author }})
     </div>

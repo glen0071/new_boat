@@ -1,5 +1,5 @@
 <template>
-  <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+  <body class="bg-gray-100 font-sans leading-normal tracking-normal pb-50">
     <nav-menu />
     <div class="container w-full md:max-w-3xl mx-auto pt-20">
 
@@ -30,7 +30,9 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+
+.pb-50 {
+  padding-bottom: 50px;
 }
 </style>

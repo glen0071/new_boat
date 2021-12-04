@@ -2,6 +2,7 @@ import { createWebHashHistory, createRouter } from "vue-router";
 import QuoteList from '@/components/QuoteList.vue'
 import QuoteForm from '@/components/QuoteForm.vue'
 import QuoteSearch from '@/components/QuoteSearch.vue'
+import About from '@/components/About.vue'
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: '/search',
     name: 'search',
     component: QuoteSearch
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: About
   },
   {
     path: '/edit/:id',
