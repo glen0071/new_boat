@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div v-for="(quote, index) in allQuotes" :key="index">
-      <QuoteItem :quote="quote" />
+      <QuoteItem :quote="quote" :index="index" />
     </div>
   </div>
 </template>

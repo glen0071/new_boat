@@ -1,10 +1,7 @@
 <template>
   <div class="w-full py-6">
     <div>
-      <router-link 
-      :to="{ name: 'edit', params: { id: findId } }"
-      >{{ quote.text }}
-      </router-link> 
+      <a href="" @click.prevent="programmaticallyNavigate" >{{ quote.text }}</a>
     </div>
     <div class="text-sm md:text-base font-normal text-gray-600 float-right"> 
       ({{ quote.author }})
@@ -20,15 +17,18 @@ export default {
     quote: { 
       type: Object,
       required: true
+    },
+    index: { 
+      type: Number,
+      required: true
     }
   },
-  computed: {
-    findId: function () {
-      if (this.quote.id) {
-        return this.quote.id
-      } else {
-        return this.quote.objectID
-      }
+  methods: {
+    programmaticallyNavigate: function () {
+      this.$store.commit('setQuote', 
+        this.$store.state.quotes[this.index]
+      )
+      this.$router.push({ name: 'detail', params: { id: this.quote.id } })
     }
   }
 }

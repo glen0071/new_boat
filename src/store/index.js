@@ -60,8 +60,10 @@ const store = createStore({
       const docRef = doc(db, "quotes", quoteId);
       const docSnap = await getDoc(docRef);
 
+
       if (docSnap.exists()) {
         this.commit('setQuote', docSnap.data())
+
       } else {
         // doc.data() will be undefined in this case
         // error handling when doc is not found
